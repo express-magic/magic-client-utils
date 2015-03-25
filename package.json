@@ -1,0 +1,26 @@
+{
+  "name": "magic-client-utils",
+  "version": "0.0.1",
+  "description": "client side utilities",
+  "main": "index.js",
+  "scripts": {
+    "setup": "bin/install",
+    "clean": "bin/clean"
+    "prepub": "bin/build",
+    "release": "bin/release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jaeh/magic-client-utils"
+  },
+  "author": "Jascha Ehrenreich <jascha@jaeh.at>",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/jaeh/magic-client-utils/issues"
+  },
+  "homepage": "https://github.com/jaeh/magic-client-utils",
+  "dependencies": {
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3"
+  }
+}
