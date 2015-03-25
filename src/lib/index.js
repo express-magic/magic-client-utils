@@ -1,8 +1,3 @@
-import dom from './dom';
-import css from './css';
-import http from './http';
-import notices from './notices';
-
 export function each (arrOrObj, func) {
   if ( typeof arrOrObj === 'array' ) {
     for ( let i = 0; i < arrOrObj.length; i++ ) {
@@ -35,6 +30,7 @@ export function hasLocalStorage() {
 var utils = {
     hasLocalStorage
   , each
+  , forEach: each
 };
 
 export default utils;

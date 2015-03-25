@@ -1,4 +1,4 @@
-import {each} from './utils';
+import {each} from './index';
 import is from 'is';
 
 export function prepend (parent, ele) {
@@ -48,20 +48,6 @@ export function id(ele, val) {
   }
 }
 
-export function cssClass(ele, name) {
-  if ( ! ele || ! is.fn(ele.setAttribute) ) {
-    throw Error('dom.class called without arguments, dom.class(ele, name)');
-  }
-  if ( ! name ) {
-    return ele.className;
-  }
-  var nameArray = name.split(/,| /ig);
-  each(nameArray, (name) => {
-    addClass(ele, name);
-  });
-  return name;
-}
-
 export function compareType(ele, type=false) {
   if (type ) {
     if ( isStr(type) ) {
@@ -95,8 +81,9 @@ export var add = append;
 export var dom = {
     prepend
   , append
+  , add
   , remove
-  , rm: remove
+  , rm
   , create
   , id
   , findParent
