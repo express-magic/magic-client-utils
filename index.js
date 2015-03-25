@@ -923,12 +923,19 @@ exports["default"] = dom;
 },{"./utils":6,"is":1}],4:[function(require,module,exports){
 "use strict";
 
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
 exports.get = get;
+exports.frameGet = frameGet;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var showError = require("./notices").showError;
+
+var dom = _interopRequire(require("./dom"));
+
+var css = _interopRequire(require("./css"));
 
 function get(url) {
   var xhr = new XMLHttpRequest();
@@ -954,7 +961,22 @@ function get(url) {
   xhr.send(null);
 }
 
-},{"./notices":5}],5:[function(require,module,exports){
+function frameGet(url) {
+  var frame = dom.create("iframe"),
+      frameContainer = dom.create("div");
+
+  css["class"].add(frameContainer, "hidden");
+  frame.src = url;
+  frame.addEventListener("load", function () {
+    console.log("iframe http request loaded with url: " + url);
+    frameContainer.parentNode.removeChild(frameContainer);
+  });
+
+  frameContainer.appendChild(frame);
+  document.body.append(frame);
+}
+
+},{"./css":2,"./dom":3,"./notices":5}],5:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };

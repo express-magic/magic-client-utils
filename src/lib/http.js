@@ -1,4 +1,6 @@
 import {showError} from './notices';
+import dom from './dom';
+import css from './css';
 
 export function get(url){
   var xhr = new XMLHttpRequest()
@@ -22,4 +24,20 @@ export function get(url){
 
   xhr.open( "GET", url, true );
   xhr.send( null );
+}
+
+export function frameGet(url) {
+  var frame = dom.create('iframe')
+    , frameContainer = dom.create('div')
+  ;
+
+  css.class.add(frameContainer, 'hidden');
+  frame.src = url;
+  frame.addEventListener('load', () => {
+    console.log(`iframe http request loaded with url: ${url}`);
+    frameContainer.parentNode.removeChild(frameContainer);
+  });
+
+  frameContainer.appendChild(frame);
+  document.body.append(frame);
 }
