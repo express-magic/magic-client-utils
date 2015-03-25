@@ -4,6 +4,7 @@ import is from 'is';
 export function showSuccess(text) {
   showNotice('success', text);
 }
+
 export function showError(text) {
   showNotice('error', text);
 }

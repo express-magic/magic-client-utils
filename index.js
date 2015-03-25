@@ -1081,20 +1081,15 @@ function hasLocalStorage() {
   }
 }
 
-var utils = {
-  hasLocalStorage: hasLocalStorage,
-  each: each,
-  forEach: each
-};
-
-exports["default"] = utils;
-
 },{}],7:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-var index = _interopRequire(require("./utils"));
+var _utils = require("./utils");
+
+var each = _utils.each;
+var hasLocalStorage = _utils.hasLocalStorage;
 
 var css = _interopRequire(require("./css"));
 
@@ -1105,8 +1100,8 @@ var http = _interopRequire(require("./http"));
 var notices = _interopRequire(require("./notices"));
 
 var utils = {
-    hasLocalStorage: index.hasLocalStorage,
-    each: index.each,
+    hasLocalStorage: hasLocalStorage,
+    each: each,
     forEach: index.each,
     css: css,
     dom: dom,

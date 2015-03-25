@@ -1,3 +1,4 @@
+
 export function each (arrOrObj, func) {
   if ( typeof arrOrObj === 'array' ) {
     for ( let i = 0; i < arrOrObj.length; i++ ) {
@@ -26,11 +27,3 @@ export function hasLocalStorage() {
       return false;
   }
 }
-
-var utils = {
-    hasLocalStorage
-  , each
-  , forEach: each
-};
-
-export default utils;
