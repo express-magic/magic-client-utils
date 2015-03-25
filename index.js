@@ -809,7 +809,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var each = require("./index").each;
+var each = require("./utils").each;
 
 var is = _interopRequire(require("is"));
 
@@ -906,7 +906,7 @@ var dom = {
 exports.dom = dom;
 exports["default"] = dom;
 
-},{"./index":5,"is":1}],4:[function(require,module,exports){
+},{"./utils":6,"is":1}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };

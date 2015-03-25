@@ -1,4 +1,4 @@
-import {each} from './index';
+import {each} from './utils';
 import is from 'is';
 
 export function prepend (parent, ele) {
