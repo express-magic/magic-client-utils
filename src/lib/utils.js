@@ -1,7 +1,7 @@
-import dom from './lib/dom';
-import css from './lib/css';
-import http from './lib/http';
-import notices from './lib/notices';
+import dom from './dom';
+import css from './css';
+import http from './http';
+import notices from './notices';
 
 var utils = {};
 

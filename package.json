@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "bin/install",
-    "clean": "bin/clean"
+    "clean": "bin/clean",
     "prepub": "bin/build",
     "release": "bin/release"
   },
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/jaeh/magic-client-utils",
   "dependencies": {
     "babelify": "^5.0.4",
-    "browserify": "^9.0.3"
+    "browserify": "^9.0.3",
+    "is": "^3.0.1"
   }
 }

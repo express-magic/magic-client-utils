@@ -1,5 +1,5 @@
 import dom from './dom';
-import {isStr} from './index';
+import is from 'is';
 
 export function showSuccess(text) {
   showNotice('success', text);
@@ -30,11 +30,11 @@ export function showNotice(cssId, text) {
 }
 
 export function getNoticeParentEle(selector) {
-  var selector = isStr(selector) ? selector.replace('#', '') : false
+  var selector = is.string(selector) ? selector.replace('#', '') : false
     , sel = selector || 'notice-parent'
     , ele = document.querySelector('#' + sel)
   ;
-  if ( ! ele || ! isObj(ele.onclick) ) {
+  if ( ! ele || ! is.fn(ele.setAttribute) ) {
     ele = dom.create('div');
     ele.setAttribute('id', selector);
     dom.prepend(document.body, ele);

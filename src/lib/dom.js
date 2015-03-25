@@ -1,29 +1,42 @@
-import {isObj, isStr, each} from './index';
+import {each} from './utils';
+import is from 'is';
 
 export function prepend (parent, ele) {
-  if ( ele && isObj(ele.onclick) && parent && isObj(parent.onclick) ) {
+  var eleIsValid = ele && is.fn(ele.setAttribute)
+    , parentIsValid = parent && is.fn(parent.insertBefore)
+  ;
+  if ( eleIsValid && parentIsValid ) {
     return parent.insertBefore(ele, parent.firstChild);
   }
-  return false;
 }
 
 export function append (parent, ele) {
-  if ( parent && parent.appendChild && isObj(ele.onclick) ) {
+  var eleIsValid = ele && is.fn(ele.setAttribute)
+    , parentIsValid = parent && is.fn(parent.appendChild)
+  ;
+  if ( eleIsValid && parentIsValid ) {
     return parent.appendChild(ele);
   }
   return false;
 }
 
 export function remove(ele) {
-  ele.parentNode.removeChild(ele);
+  if (ele && ele.parentNode && is.fn(ele.parentNode.removeChild) ) {
+    ele.parentNode.removeChild(ele);
+  }
 }
 
 export function create(ele) {
-  return document.createElement(ele);
+  var d = document
+    , docIsValid = d && is.fn(d.createElement)
+  ;
+  if ( docIsValid ) {
+    return document.createElement(ele);
+  }
 }
 
 export function id(ele, val) {
-  if ( ! ele || ! isObj(ele.onclick) ) {
+  if ( ! ele || ! is.fn(ele.setAttribute) ) {
     throw new Error('dom.id called without arguments, dom.id(ele, text)');
   }
   if ( ! val ) {
@@ -36,7 +49,7 @@ export function id(ele, val) {
 }
 
 export function cssClass(ele, name) {
-  if ( ! ele || ! isObj(ele.onclick) ) {
+  if ( ! ele || ! is.fn(ele.setAttribute) ) {
     throw Error('dom.class called without arguments, dom.class(ele, name)');
   }
   if ( ! name ) {
@@ -50,7 +63,7 @@ export function cssClass(ele, name) {
 }
 
 export function toggleClass(ele, name) {
-  if ( ! ele || ! isObj(ele.onclick) ) {
+  if ( ! ele || ! is.fn(ele.setAttribute) ) {
     throw Error('dom.class.toggle called without arguments, dom.class.toggle(ele, name)');
   }
   if ( hasClass(ele, name) ) {
