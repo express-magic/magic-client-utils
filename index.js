@@ -906,7 +906,7 @@ var dom = {
 exports.dom = dom;
 exports["default"] = dom;
 
-},{"./index":5,"is":1}],4:[function(require,module,exports){
+},{"./index":undefined,"is":1}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -962,53 +962,7 @@ function frameGet(url) {
   document.body.append(frame);
 }
 
-},{"./css":2,"./dom":3,"./notices":6}],5:[function(require,module,exports){
-"use strict";
-
-exports.each = each;
-exports.hasLocalStorage = hasLocalStorage;
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function each(arrOrObj, func) {
-  if (typeof arrOrObj === "array") {
-    for (var i = 0; i < arrOrObj.length; i++) {
-      func(arrOrObj[i], i);
-    }
-  } else if (typeof arrOrObj === "object") {
-    for (var key in arrOrObj) {
-      if (arrOrObj.hasOwnProperty(key)) {
-        func(arrOrObj[key], key);
-      }
-    }
-  } else {
-    error("utils: each called without array or object: " + arrOrObj);
-  }
-}
-
-function hasLocalStorage() {
-  try {
-    localStorage.setItem("itemtest235", "mod");
-    if (!localStorage.getItem("itemtest235") === "mod") {
-      throw Error("getItem failed");
-    }
-    localStorage.removeItem("itemtest235");
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-var utils = {
-  hasLocalStorage: hasLocalStorage,
-  each: each,
-  forEach: each
-};
-
-exports["default"] = utils;
-
-},{}],6:[function(require,module,exports){
+},{"./css":2,"./dom":3,"./notices":5}],5:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -1089,20 +1043,66 @@ function getNoticeEle(cssId, val) {
   return ele;
 }
 
-},{"./dom":3,"is":1}],7:[function(require,module,exports){
+},{"./dom":3,"is":1}],6:[function(require,module,exports){
+"use strict";
+
+exports.each = each;
+exports.hasLocalStorage = hasLocalStorage;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function each(arrOrObj, func) {
+  if (typeof arrOrObj === "array") {
+    for (var i = 0; i < arrOrObj.length; i++) {
+      func(arrOrObj[i], i);
+    }
+  } else if (typeof arrOrObj === "object") {
+    for (var key in arrOrObj) {
+      if (arrOrObj.hasOwnProperty(key)) {
+        func(arrOrObj[key], key);
+      }
+    }
+  } else {
+    error("utils: each called without array or object: " + arrOrObj);
+  }
+}
+
+function hasLocalStorage() {
+  try {
+    localStorage.setItem("itemtest235", "mod");
+    if (!localStorage.getItem("itemtest235") === "mod") {
+      throw Error("getItem failed");
+    }
+    localStorage.removeItem("itemtest235");
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+var utils = {
+  hasLocalStorage: hasLocalStorage,
+  each: each,
+  forEach: each
+};
+
+exports["default"] = utils;
+
+},{}],7:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-var index = _interopRequire(require("./lib/index"));
+var index = _interopRequire(require("./utils"));
 
-var css = _interopRequire(require("./lib/css"));
+var css = _interopRequire(require("./css"));
 
-var dom = _interopRequire(require("./lib/dom"));
+var dom = _interopRequire(require("./dom"));
 
-var http = _interopRequire(require("./lib/http"));
+var http = _interopRequire(require("./http"));
 
-var notices = _interopRequire(require("./lib/notices"));
+var notices = _interopRequire(require("./notices"));
 
 var utils = {
     hasLocalStorage: index.hasLocalStorage,
@@ -1116,4 +1116,4 @@ var utils = {
 
 module.exports = utils;
 
-},{"./lib/css":2,"./lib/dom":3,"./lib/http":4,"./lib/index":5,"./lib/notices":6}]},{},[7]);
+},{"./css":2,"./dom":3,"./http":4,"./notices":5,"./utils":6}]},{},[7]);
