@@ -1054,8 +1054,6 @@ var http = _interopRequire(require("./http"));
 
 var notices = _interopRequire(require("./notices"));
 
-var utils = {};
-
 function each(arrOrObj, func) {
   if (typeof arrOrObj === "array") {
     for (var i = 0; i < arrOrObj.length; i++) {
@@ -1085,7 +1083,7 @@ function hasLocalStorage() {
   }
 }
 
-utils = {
+var utils = {
   hasLocalStorage: hasLocalStorage,
   each: each,
   dom: dom,

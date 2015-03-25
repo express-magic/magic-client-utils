@@ -3,8 +3,6 @@ import css from './css';
 import http from './http';
 import notices from './notices';
 
-var utils = {};
-
 export function each (arrOrObj, func) {
   if ( typeof arrOrObj === 'array' ) {
     for ( let i = 0; i < arrOrObj.length; i++ ) {
@@ -34,7 +32,7 @@ export function hasLocalStorage() {
   }
 }
 
-utils = {
+var utils = {
     hasLocalStorage
   , each
   , dom
