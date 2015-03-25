@@ -906,7 +906,7 @@ var dom = {
 exports.dom = dom;
 exports["default"] = dom;
 
-},{"./index":undefined,"is":1}],4:[function(require,module,exports){
+},{"./index":5,"is":1}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -963,6 +963,33 @@ function frameGet(url) {
 },{"./css":2,"./dom":3}],5:[function(require,module,exports){
 "use strict";
 
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var _utils = require("./utils");
+
+var each = _utils.each;
+var hasLocalStorage = _utils.hasLocalStorage;
+
+var css = _interopRequire(require("./css"));
+
+var dom = _interopRequire(require("./dom"));
+
+var http = _interopRequire(require("./http"));
+
+var utils = {
+    hasLocalStorage: hasLocalStorage,
+    each: each,
+    forEach: index.each,
+    css: css,
+    dom: dom,
+    http: http
+};
+
+module.exports = utils;
+
+},{"./css":2,"./dom":3,"./http":4,"./utils":6}],6:[function(require,module,exports){
+"use strict";
+
 exports.each = each;
 exports.hasLocalStorage = hasLocalStorage;
 Object.defineProperty(exports, "__esModule", {
@@ -998,31 +1025,4 @@ function hasLocalStorage() {
   }
 }
 
-},{}],6:[function(require,module,exports){
-"use strict";
-
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-var _utils = require("./utils");
-
-var each = _utils.each;
-var hasLocalStorage = _utils.hasLocalStorage;
-
-var css = _interopRequire(require("./css"));
-
-var dom = _interopRequire(require("./dom"));
-
-var http = _interopRequire(require("./http"));
-
-var utils = {
-    hasLocalStorage: hasLocalStorage,
-    each: each,
-    forEach: index.each,
-    css: css,
-    dom: dom,
-    http: http
-};
-
-module.exports = utils;
-
-},{"./css":2,"./dom":3,"./http":4,"./utils":5}]},{},[6]);
+},{}]},{},[5]);
