@@ -1,4 +1,3 @@
-import {showError} from './notices';
 import dom from './dom';
 import css from './css';
 
@@ -11,9 +10,9 @@ export function get(url){
       //valid http error codes
       console.log('status', xhr.status);
       if ( xhr.status >= 400 && xhr.status <= 599 ) {
-        showError(`API ${xhr.status} Error`);
+        //~ showError(`API ${xhr.status} Error`);
       } else if (xhr.status === 200 ) {
-        console.log(`API call returned a 200`);
+        //~ showSuccess(`API call returned a 200`);
       }
     }
   }

@@ -917,8 +917,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var showError = require("./notices").showError;
-
 var dom = _interopRequire(require("./dom"));
 
 var css = _interopRequire(require("./css"));
@@ -931,11 +929,7 @@ function get(url) {
     if (xhr.readyState == 4) {
       //valid http error codes
       console.log("status", xhr.status);
-      if (xhr.status >= 400 && xhr.status <= 599) {
-        showError("API " + xhr.status + " Error");
-      } else if (xhr.status === 200) {
-        console.log("API call returned a 200");
-      }
+      if (xhr.status >= 400 && xhr.status <= 599) {} else if (xhr.status === 200) {}
     }
   };
 
@@ -962,88 +956,11 @@ function frameGet(url) {
   document.body.append(frame);
 }
 
-},{"./css":2,"./dom":3,"./notices":5}],5:[function(require,module,exports){
-"use strict";
+//~ showError(`API ${xhr.status} Error`);
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+//~ showSuccess(`API call returned a 200`);
 
-exports.showSuccess = showSuccess;
-exports.showError = showError;
-exports.showNotice = showNotice;
-exports.getNoticeParentEle = getNoticeParentEle;
-exports.getNoticeEle = getNoticeEle;
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var dom = _interopRequire(require("./dom"));
-
-var is = _interopRequire(require("is"));
-
-function showSuccess(text) {
-  showNotice("success", text);
-}
-
-function showError(text) {
-  showNotice("error", text);
-}
-
-function showNotice(cssId, text) {
-  var ele = getNoticeEle(cssId, text);
-
-  if (typeof text === "string" && text) {
-    var interval;
-
-    (function () {
-      var currentCount = 0;
-      interval = setInterval(function () {
-        if (currentCount === 0) {
-          //0 milliseconds
-          dom["class"].add(ele, "visible");
-        }
-        if (currentCount === 6) {
-          //3 seconds
-          dom["class"].rm(ele, "visible");
-        }
-        if (currentCount >= 8) {
-          //4 seconds
-          clearInterval(interval);
-          dom.rm(ele);
-        }
-        currentCount++;
-      }, 100);
-    })();
-  }
-}
-
-function getNoticeParentEle(selector) {
-  var selector = is.string(selector) ? selector.replace("#", "") : false,
-      sel = selector || "notice-parent",
-      ele = document.querySelector("#" + sel);
-  if (!ele || !is.fn(ele.setAttribute)) {
-    ele = dom.create("div");
-    ele.setAttribute("id", selector);
-    dom.prepend(document.body, ele);
-  }
-  return ele;
-}
-
-function getNoticeEle(cssId, val) {
-  var par = getNoticeParentEle(),
-      ele = document.querySelector("#" + cssId);
-  if (!ele || !isFunc(ele.getAttribute)) {
-    ele = document.createElement("div");
-    dom.id(ele, cssId);
-    dom["class"](ele, "notice");
-    dom.append(par, ele);
-  }
-  if (typeof val === "string") {
-    ele.innerText = val;
-  }
-  return ele;
-}
-
-},{"./dom":3,"is":1}],6:[function(require,module,exports){
+},{"./css":2,"./dom":3}],5:[function(require,module,exports){
 "use strict";
 
 exports.each = each;
@@ -1081,7 +998,7 @@ function hasLocalStorage() {
   }
 }
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -1097,18 +1014,15 @@ var dom = _interopRequire(require("./dom"));
 
 var http = _interopRequire(require("./http"));
 
-var notices = _interopRequire(require("./notices"));
-
 var utils = {
     hasLocalStorage: hasLocalStorage,
     each: each,
     forEach: index.each,
     css: css,
     dom: dom,
-    http: http,
-    notices: notices
+    http: http
 };
 
 module.exports = utils;
 
-},{"./css":2,"./dom":3,"./http":4,"./notices":5,"./utils":6}]},{},[7]);
+},{"./css":2,"./dom":3,"./http":4,"./utils":5}]},{},[6]);
