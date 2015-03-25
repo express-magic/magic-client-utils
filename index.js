@@ -804,10 +804,6 @@ exports.remove = remove;
 exports.create = create;
 exports.id = id;
 exports.cssClass = cssClass;
-exports.toggleClass = toggleClass;
-exports.hasClass = hasClass;
-exports.addClass = addClass;
-exports.removeClass = removeClass;
 exports.compareType = compareType;
 exports.findParent = findParent;
 Object.defineProperty(exports, "__esModule", {
@@ -876,31 +872,6 @@ function cssClass(ele, name) {
   return name;
 }
 
-function toggleClass(ele, name) {
-  if (!ele || !is.fn(ele.setAttribute)) {
-    throw Error("dom.class.toggle called without arguments, dom.class.toggle(ele, name)");
-  }
-  if (hasClass(ele, name)) {
-    removeClass(ele, name);
-    return false;
-  } else {
-    addClass(ele, name);
-    return true;
-  }
-}
-
-function hasClass(ele, name) {
-  return ele.className.indexOf(name) > -1;
-}
-
-function addClass(ele, name) {
-  ele.classList.add(name);
-}
-
-function removeClass(ele, name) {
-  ele.classList.remove(name);
-}
-
 function compareType(ele) {
   var type = arguments[1] === undefined ? false : arguments[1];
 
@@ -936,23 +907,17 @@ exports.rm = rm;
 var add = append;
 
 exports.add = add;
-var dom = {};
-
+var dom = {
+  prepend: prepend,
+  append: append,
+  remove: remove,
+  rm: remove,
+  create: create,
+  id: id,
+  findParent: findParent,
+  parent: findParent
+};
 exports.dom = dom;
-dom.prepend = prepend;
-dom.append = append;
-dom.remove = remove;
-dom.rm = remove;
-dom.create = create;
-dom.id = id;
-dom["class"] = cssClass;
-dom["class"].toggle = toggleClass;
-dom["class"].has = hasClass;
-dom["class"].add = addClass;
-dom["class"].remove = removeClass;
-dom["class"].rm = removeClass;
-dom.parent = findParent;
-
 exports["default"] = dom;
 
 },{"./utils":6,"is":1}],4:[function(require,module,exports){

@@ -62,31 +62,6 @@ export function cssClass(ele, name) {
   return name;
 }
 
-export function toggleClass(ele, name) {
-  if ( ! ele || ! is.fn(ele.setAttribute) ) {
-    throw Error('dom.class.toggle called without arguments, dom.class.toggle(ele, name)');
-  }
-  if ( hasClass(ele, name) ) {
-    removeClass(ele, name);
-    return false;
-  } else {
-    addClass(ele, name);
-    return true;
-  }
-}
-
-export function hasClass(ele, name) {
-  return ele.className.indexOf(name) > -1;
-}
-
-export function addClass(ele, name) {
-  ele.classList.add(name);
-}
-
-export function removeClass(ele, name) {
-  ele.classList.remove(name);
-}
-
 export function compareType(ele, type=false) {
   if (type ) {
     if ( isStr(type) ) {
@@ -117,20 +92,14 @@ export function findParent(ele, type=false) {
 export var rm = remove;
 export var add = append;
 
-export var dom = {}
-
-dom.prepend = prepend;
-dom.append = append;
-dom.remove = remove;
-dom.rm = remove;
-dom.create = create;
-dom.id = id;
-dom.class = cssClass;
-dom.class.toggle = toggleClass;
-dom.class.has = hasClass;
-dom.class.add = addClass;
-dom.class.remove  = removeClass;
-dom.class.rm  = removeClass;
-dom.parent = findParent;
-
+export var dom = {
+    prepend
+  , append
+  , remove
+  , rm: remove
+  , create
+  , id
+  , findParent
+  , parent: findParent
+};
 export default dom;
