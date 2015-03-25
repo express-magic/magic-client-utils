@@ -765,264 +765,43 @@ is.symbol = function (value) {
 },{}],2:[function(require,module,exports){
 "use strict";
 
-var css = {
-  "class": {
-    toggle: function toggle(ele, name) {
-      if (hasClass(ele, name)) {
-        rmClass(ele, name);
-        return false;
-      } else {
-        addClass(ele, name);
-        return true;
-      }
-    },
-
-    has: function has(ele, name) {
-      return ele.className.indexOf(name) > -1;
-    },
-
-    add: function add(ele, name) {
-      ele.classList.add(name);
-    },
-
-    remove: function remove(ele, name) {
-      ele.classList.remove(name);
-    }
-  }
-};
-
-module.exports = css;
-
-},{}],3:[function(require,module,exports){
-"use strict";
-
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-exports.prepend = prepend;
-exports.append = append;
-exports.remove = remove;
-exports.create = create;
-exports.id = id;
-exports.compareType = compareType;
-exports.findParent = findParent;
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var each = require("./utils").each;
 
 var is = _interopRequire(require("is"));
 
-function prepend(parent, ele) {
-  var eleIsValid = ele && is.fn(ele.setAttribute),
-      parentIsValid = parent && is.fn(parent.insertBefore);
-  if (eleIsValid && parentIsValid) {
-    return parent.insertBefore(ele, parent.firstChild);
-  }
-}
-
-function append(parent, ele) {
-  var eleIsValid = ele && is.fn(ele.setAttribute),
-      parentIsValid = parent && is.fn(parent.appendChild);
-  if (eleIsValid && parentIsValid) {
-    return parent.appendChild(ele);
-  }
-  return false;
-}
-
-function remove(ele) {
-  if (ele && ele.parentNode && is.fn(ele.parentNode.removeChild)) {
-    ele.parentNode.removeChild(ele);
-  }
-}
-
-function create(ele) {
-  var d = document,
-      docIsValid = d && is.fn(d.createElement);
-  if (docIsValid) {
-    return document.createElement(ele);
-  }
-}
-
-function id(ele, val) {
-  if (!ele || !is.fn(ele.setAttribute)) {
-    throw new Error("dom.id called without arguments, dom.id(ele, text)");
-  }
-  if (!val) {
-    return ele.getAttribute("id");
-  }
-  if (isStr(val)) {
-    ele.setAttribute("id", val);
-    return ele.getAttribute("id");
-  }
-}
-
-function compareType(ele) {
-  var type = arguments[1] === undefined ? false : arguments[1];
-
-  if (type) {
-    if (isStr(type)) {
-      return ele.parentNode.tagName.toLowerCase() === type.toLowerCase();
-    } else if (isArr(type) || isObj(type)) {
-      each(type, function (t) {
-        if (compareType(ele, t)) {
-          return true;
-        }
-      });
-    }
-    return false;
-  }
-}
-
-function findParent(ele) {
-  var type = arguments[1] === undefined ? false : arguments[1];
-
-  console.log("find parent for ele " + ele + " and type " + type);
-  if (!ele || !ele.parentNode || !type) {
-    return false;
-  }
-  if (compareType(ele.parentNode, type)) {
-    return ele.parentNode;rr;
-  }
-  findParent(ele.parentNode, type);
-}
-
-var rm = remove;
-exports.rm = rm;
-var add = append;
-
-exports.add = add;
-var dom = {
-  prepend: prepend,
-  append: append,
-  add: add,
-  remove: remove,
-  rm: rm,
-  create: create,
-  id: id,
-  findParent: findParent,
-  parent: findParent
-};
-exports.dom = dom;
-exports["default"] = dom;
-
-},{"./utils":6,"is":1}],4:[function(require,module,exports){
-"use strict";
-
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-exports.get = get;
-exports.frameGet = frameGet;
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var dom = _interopRequire(require("./dom"));
-
-var css = _interopRequire(require("./css"));
-
-function get(url) {
-  var xhr = new XMLHttpRequest();
-  console.log("http request to url: " + url);
-  xhr.timeout = 4000;
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-      //valid http error codes
-      console.log("status", xhr.status);
-      if (xhr.status >= 400 && xhr.status <= 599) {} else if (xhr.status === 200) {}
-    }
-  };
-
-  xhr.ontimeout = function () {
-    console.log("Timed out!!!");
-  };
-
-  xhr.open("GET", url, true);
-  xhr.send(null);
-}
-
-function frameGet(url) {
-  var frame = dom.create("iframe"),
-      frameContainer = dom.create("div");
-
-  css["class"].add(frameContainer, "hidden");
-  frame.src = url;
-  frame.addEventListener("load", function () {
-    console.log("iframe http request loaded with url: " + url);
-    frameContainer.parentNode.removeChild(frameContainer);
-  });
-
-  frameContainer.appendChild(frame);
-  document.body.append(frame);
-}
-
-//~ showError(`API ${xhr.status} Error`);
-
-//~ showSuccess(`API call returned a 200`);
-
-},{"./css":2,"./dom":3}],5:[function(require,module,exports){
-"use strict";
-
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-var _utils = require("./utils");
-
-var each = _utils.each;
-var hasLocalStorage = _utils.hasLocalStorage;
-
-var css = _interopRequire(require("./css"));
-
-var dom = _interopRequire(require("./dom"));
-
-var http = _interopRequire(require("./http"));
-
 var utils = {
-    hasLocalStorage: hasLocalStorage,
-    each: each,
-    forEach: index.each,
-    css: css,
-    dom: dom,
-    http: http
+  each: function each(arrOrObj, func) {
+    if (typeof arrOrObj === "array") {
+      for (var i = 0; i < arrOrObj.length; i++) {
+        if (is.func(func)) {
+          func(arrOrObj[i], i);
+        }
+      }
+    } else if (typeof arrOrObj === "object") {
+      for (var key in arrOrObj) {
+        if (arrOrObj.hasOwnProperty(key) && is.fn(func)) {
+          func(arrOrObj[key], key);
+        }
+      }
+    } else {
+      error("utils: each called without array or object: " + arrOrObj);
+    }
+  },
+
+  hasLocalStorage: function hasLocalStorage() {
+    try {
+      localStorage.setItem("itemtest235", "mod");
+      if (!localStorage.getItem("itemtest235") === "mod") {
+        throw Error("getItem failed");
+      }
+      localStorage.removeItem("itemtest235");
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 };
 
 module.exports = utils;
 
-},{"./css":2,"./dom":3,"./http":4,"./utils":6}],6:[function(require,module,exports){
-"use strict";
-
-exports.each = each;
-exports.hasLocalStorage = hasLocalStorage;
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function each(arrOrObj, func) {
-  if (typeof arrOrObj === "array") {
-    for (var i = 0; i < arrOrObj.length; i++) {
-      func(arrOrObj[i], i);
-    }
-  } else if (typeof arrOrObj === "object") {
-    for (var key in arrOrObj) {
-      if (arrOrObj.hasOwnProperty(key)) {
-        func(arrOrObj[key], key);
-      }
-    }
-  } else {
-    error("utils: each called without array or object: " + arrOrObj);
-  }
-}
-
-function hasLocalStorage() {
-  try {
-    localStorage.setItem("itemtest235", "mod");
-    if (!localStorage.getItem("itemtest235") === "mod") {
-      throw Error("getItem failed");
-    }
-    localStorage.removeItem("itemtest235");
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-},{}]},{},[5]);
+},{"is":1}]},{},[2]);
